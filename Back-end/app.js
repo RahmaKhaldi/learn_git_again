@@ -8,6 +8,13 @@ const postRoutes=require('./routes/post')
 const commentRoutes=require('./routes/comment')
 var cors = require('cors')
 
+if(process.env.NODDE_ENV==='production')
+{
+  app.use(express.static('client/build'))
+}
+app.get('*',(req, res) =>{
+  res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+});
 connectDB()
 //middleware
 app.use(cors())
